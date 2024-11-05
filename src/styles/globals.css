@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-.light {
+.light-theme {
     --text-color: 200, 15%, 8%;
     --input-color: 0, 0%, 52%;
     --background-color: 0, 0%, 98%;
     --elements-color: 0, 0%, 100%;
 }
 
-.dark {
+.dark-theme {
     --text-color: 0, 0%, 100%;
     --input-color: 0, 0%, 52%;
     --background-color: 207, 26%, 17%;

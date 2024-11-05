@@ -1,9 +1,11 @@
 ---
+import "../styles/globals.css";
 
-import '../styles/globals.css';
+import { isDarkMode } from "../store.js";
+import Header from "../components/Header.astro";
 
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -11,16 +13,31 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body class="dark">
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class={isDarkMode.value ? "dark-theme" : "light-theme"}>
+    <Header />
+    <slot />
+  </body>
 </html>
 
+<script>
+  import { isDarkMode } from "../store.js";
+
+  // Listen to changes in the store, and show/hide the dialog accordingly
+  isDarkMode.subscribe((dark) => {
+    if (dark) {
+      document.getElementsByTagName("body")[0].classList.add("dark-theme");
+      document.getElementsByTagName("body")[0].classList.remove("light-theme");
+    } else {
+      document.getElementsByTagName("body")[0].classList.add("light-theme");
+      document.getElementsByTagName("body")[0].classList.remove("dark-theme");
+    }
+  });
+</script>
