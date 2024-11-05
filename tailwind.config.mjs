@@ -2,7 +2,14 @@
 export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				background: "hsl(var(--background-color))",
+				elements: "hsl(var(--elements-color))",
+				"color-text": "hsl(var(--text-color))",
+				input: "hsl(var(--input-color))",
+			}
+		},
 	},
 	plugins: [],
 }

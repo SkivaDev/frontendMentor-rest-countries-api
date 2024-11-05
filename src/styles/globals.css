@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.light {
+    --text-color: 200, 15%, 8%;
+    --input-color: 0, 0%, 52%;
+    --background-color: 0, 0%, 98%;
+    --elements-color: 0, 0%, 100%;
+}
+
+.dark {
+    --text-color: 0, 0%, 100%;
+    --input-color: 0, 0%, 52%;
+    --background-color: 207, 26%, 17%;
+    --elements-color: 209, 23%, 22%;
+}
+
