@@ -21,7 +21,7 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class={isDarkMode.value ? "dark-theme" : "light-theme"}>
+  <body class="bg-background">
     <Header />
     <slot />
   </body>

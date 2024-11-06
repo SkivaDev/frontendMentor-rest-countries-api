@@ -1,14 +1,17 @@
 ---
+import Search from '../components/Search.astro';
+import FilterRegions from '../components/FilterRegions.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Welcome to Astro.">
-	<main>
-		<div class="bg-background">
-			<h1 class="text-color-text">Hello Skivadev</h1>
-
-			<div class="bg-elements">
-				<p class="">adsadasdadwltexto</p>
+	<main class="">
+		<div class="text-color-text px-[80px] min-h-screen pt-[50px]">
+			<div class="">
+				<div class="flex justify-between items-center w-full">
+					<Search />
+					<FilterRegions />
+				</div>
 			</div>
 		</div>
 	</main>

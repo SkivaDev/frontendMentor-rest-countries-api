@@ -8,6 +8,7 @@ export default {
 				elements: "hsl(var(--elements-color))",
 				"color-text": "hsl(var(--text-color))",
 				input: "hsl(var(--input-color))",
+				"color-placeholder": "hsl(var(--placeholder-color))",
 			}
 		},
 	},

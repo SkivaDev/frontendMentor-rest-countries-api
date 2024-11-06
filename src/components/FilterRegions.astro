@@ -1,0 +1,64 @@
+---
+// ComboBox.astro
+---
+
+<div class="relative inline-block w-[200px] shadow-md">
+  <button
+    type="button"
+    class="combobox-toggle w-full bg-elements border border-gray-300 rounded-md px-[21px] py-[15px] text-left focus:outline-none text-[14px] font-semibold"
+  >
+    Filter by Region
+    <span class="float-right">&#x25BC;</span>
+    <!-- Down arrow -->
+  </button>
+
+  <ul
+    id="dropdown-menu"
+    class="hidden absolute left-0 right-0 mt-2 bg-elements border border-gray-300 rounded-md shadow-lg z-10"
+  >
+    <li id="li-africa" class="px-4 py-2 hover:bg-elements cursor-pointer">Africa</li>
+    <li id="li-america" class="px-4 py-2 hover:bg-elements cursor-pointer">America</li>
+    <li id="li-asia" class="px-4 py-2 hover:bg-elements cursor-pointer">Asia</li>
+    <li id="li-europe" class="px-4 py-2 hover:bg-elements cursor-pointer">Europe</li>
+    <li id="li-ociania" class="px-4 py-2 hover:bg-elements cursor-pointer">Oceania</li>
+  </ul>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const button = document.querySelector(".combobox-toggle");
+    const dropdownMenu = document.getElementById("dropdown-menu");
+
+    let isOpen = false;
+
+    if (button) {
+      button.addEventListener("click", () => {
+        isOpen = !isOpen;
+        console.log("hola");
+        console.log(isOpen);
+
+        if (isOpen) {
+          if (dropdownMenu) {
+            dropdownMenu.classList.remove("hidden");
+          }
+        } else {
+          if (dropdownMenu) {
+            dropdownMenu.classList.add("hidden");
+          }
+        }
+      });
+    }
+    // Close the dropdown if clicked outside
+    document.addEventListener("click", (event) => {
+      if (
+        button &&
+        dropdownMenu &&
+        !button.contains(event.target as Node) &&
+        !dropdownMenu.contains(event.target as Node)
+      ) {
+        isOpen = false;
+        dropdownMenu.classList.add("hidden");
+      }
+    });
+  });
+</script>

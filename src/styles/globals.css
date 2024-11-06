@@ -7,6 +7,7 @@
     --input-color: 0, 0%, 52%;
     --background-color: 0, 0%, 98%;
     --elements-color: 0, 0%, 100%;
+    --text-placeholder: 0, 0%, 52%;
 }
 
 .dark-theme {
@@ -14,5 +15,6 @@
     --input-color: 0, 0%, 52%;
     --background-color: 207, 26%, 17%;
     --elements-color: 209, 23%, 22%;
+    --text-placeholder: 0, 0%, 100%;
 }
 
