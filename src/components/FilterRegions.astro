@@ -5,60 +5,57 @@
 <div class="relative inline-block w-[200px] shadow-md">
   <button
     type="button"
-    class="combobox-toggle w-full bg-elements border border-gray-300 rounded-md px-[21px] py-[15px] text-left focus:outline-none text-[14px] font-semibold"
+    class="combobox-toggle flex justify-between items-center w-full bg-elements border border-gray-300 rounded-md px-[21px] py-[15px] text-left focus:outline-none text-[14px] font-semibold"
   >
-    Filter by Region
-    <span class="float-right">&#x25BC;</span>
-    <!-- Down arrow -->
+    <p class="combobox-selected">Filter by Region</p>
+    <span class="float-right">&#x25BC;</span> <!-- Down arrow -->
   </button>
 
   <ul
     id="dropdown-menu"
     class="hidden absolute left-0 right-0 mt-2 bg-elements border border-gray-300 rounded-md shadow-lg z-10"
   >
-    <li id="li-africa" class="px-4 py-2 hover:bg-elements cursor-pointer">Africa</li>
-    <li id="li-america" class="px-4 py-2 hover:bg-elements cursor-pointer">America</li>
-    <li id="li-asia" class="px-4 py-2 hover:bg-elements cursor-pointer">Asia</li>
-    <li id="li-europe" class="px-4 py-2 hover:bg-elements cursor-pointer">Europe</li>
-    <li id="li-ociania" class="px-4 py-2 hover:bg-elements cursor-pointer">Oceania</li>
+    <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">All</li>
+    <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">Africa</li>
+    <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">America</li>
+    <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">Asia</li>
+    <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">Europe</li>
+    <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">Oceania</li>
   </ul>
 </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const button = document.querySelector(".combobox-toggle");
+    const selectedText = document.querySelector(".combobox-selected");
     const dropdownMenu = document.getElementById("dropdown-menu");
+    const regions = dropdownMenu ? dropdownMenu.querySelectorAll("li") : [];
 
     let isOpen = false;
 
-    if (button) {
-      button.addEventListener("click", () => {
-        isOpen = !isOpen;
-        console.log("hola");
-        console.log(isOpen);
+    button?.addEventListener("click", (event) => {
+      isOpen = !isOpen;
+      dropdownMenu?.classList.toggle("hidden", !isOpen);
+      event.stopPropagation();
+    });
 
-        if (isOpen) {
-          if (dropdownMenu) {
-            dropdownMenu.classList.remove("hidden");
-          }
-        } else {
-          if (dropdownMenu) {
-            dropdownMenu.classList.add("hidden");
-          }
-        }
-      });
-    }
-    // Close the dropdown if clicked outside
-    document.addEventListener("click", (event) => {
-      if (
-        button &&
-        dropdownMenu &&
-        !button.contains(event.target as Node) &&
-        !dropdownMenu.contains(event.target as Node)
-      ) {
+    // Cerrar el menú si se hace clic fuera de él
+    document.addEventListener("click", () => {
+      if (isOpen) {
         isOpen = false;
-        dropdownMenu.classList.add("hidden");
+        dropdownMenu?.classList.add("hidden");
       }
     });
+
+    // Actualizar el texto del botón con la región seleccionada
+    regions.forEach((region) => {
+      region.addEventListener("click", () => {
+        const regionText = region.textContent?.trim() || "Filter by Region";
+        selectedText ? selectedText.textContent = regionText : null;
+        isOpen = false;
+        dropdownMenu?.classList.add("hidden");
+      });
+    });
+
   });
 </script>
