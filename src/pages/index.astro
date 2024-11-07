@@ -40,7 +40,7 @@ import CountryCard from "../components/CountryCard.astro";
 <script>
 	import countriesAPI from "../services/api/countriesAPI";
 	import type { Country } from "../types/country";
-	import { countries, selectedRegion } from "../store.js";
+	import { countries, selectedRegion, inputSearch } from "../store.js";
 
 	document.addEventListener("DOMContentLoaded", async function () {
 		const countriesList = document.querySelector(".countries-list");
@@ -48,11 +48,8 @@ import CountryCard from "../components/CountryCard.astro";
 		// Render countries
 		const renderCountries = (countries: Country[]) => {
 			if (countriesList) {
-				countriesList.innerHTML = "";
-				countries.forEach((country: Country) => {
-					const countryCard = document.createElement("div");
-					countryCard.classList.add("country-card", "bg-elements", "hover:cursor-pointer", "shadow-md", "rounded-md", "overflow-hidden");
-					countryCard.innerHTML = `
+				countriesList.innerHTML = countries.map((country: Country) => `
+					<div class="country-card bg-elements hover:cursor-pointer shadow-md rounded-md overflow-hidden">
 						<img src='${country.flags.svg}' alt='${country.name.common}' class="w-full h-[160px] object-cover" />
 						<div class="p-6">
 							<h2 class="text-color-text font-semibold text-[18px] mb-4">${country.name.common}</h2>
@@ -66,21 +63,17 @@ import CountryCard from "../components/CountryCard.astro";
 								<span class="font-semibold">Capital:</span> ${country.capital}
 							</p>
 						</div>
-					`;
-					countriesList.appendChild(countryCard);
-				});
+					</div>
+				`).join('');
 			}
 		};
 
 		// Fetch and set countries data
 		const fetchCountriesData = async (region: string) => {
 			try {
-				let countriesData;
-				if (region === "all") {
-					countriesData = await countriesAPI.getAll();
-				} else {
-					countriesData = await countriesAPI.getAllByRegion(region);
-				}
+				const countriesData = region === "All"
+					? await countriesAPI.getAll() 
+					: await countriesAPI.getAllByRegion(region.toLowerCase());
 				countries.set(countriesData);
 				localStorage.setItem("countriesData", JSON.stringify(countriesData));
 				renderCountries(countriesData);
@@ -89,24 +82,30 @@ import CountryCard from "../components/CountryCard.astro";
 			}
 		};
 
-		// Filter countries by region
-		selectedRegion.subscribe(async (region) => {
-			const cachedData = localStorage.getItem("countriesData");
-			if (cachedData) {
-				const countriesData = JSON.parse(cachedData);
-				if (region === "all") {
-					countries.set(countriesData);
-				} else {
-					const filteredCountries = countriesData.filter((country: Country) => country.region === region.charAt(0).toUpperCase() + region.slice(1));
-					countries.set(filteredCountries);
-				}
-				renderCountries(countries.value);
-			} else {
-				await fetchCountriesData(region);
-			}
+		// Filter countries by region and search term
+		const filterCountries = (region: string, searchTerm: string) => {
+			const cachedData = JSON.parse(localStorage.getItem("countriesData") || '[]');
+			const filteredCountries = cachedData.filter((country: Country) => {
+				const matchesRegion = region === "All" || country.region === region;
+				const matchesSearch = country.name.common.toLowerCase().includes(searchTerm.toLowerCase());
+				return matchesRegion && matchesSearch;
+			});
+			countries.set(filteredCountries);
+			renderCountries(filteredCountries);
+		};
+
+		// Subscribe to region and search term changes
+		selectedRegion.subscribe(region => {
+			const searchTerm = inputSearch.value;
+			filterCountries(region, searchTerm);
+		});
+
+		inputSearch.subscribe(searchTerm => {
+			const region = selectedRegion.value;
+			filterCountries(region, searchTerm);
 		});
 
 		// Initial fetch
-		await fetchCountriesData("all");
+		await fetchCountriesData("All");
 	});
 </script>

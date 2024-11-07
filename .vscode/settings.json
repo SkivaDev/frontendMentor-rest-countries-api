@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "project",
         "header",
-        "filterRegions"
+        "filterRegions",
+        "search"
     ]
 }

@@ -4,4 +4,6 @@ export const isDarkMode = atom(true);
 
 export const countries = atom([]);
 
-export const selectedRegion = atom('all');
+export const selectedRegion = atom('All');
+
+export const inputSearch = atom('');
