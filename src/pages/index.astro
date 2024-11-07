@@ -1,20 +1,90 @@
 ---
-import Search from '../components/Search.astro';
-import FilterRegions from '../components/FilterRegions.astro';
-import Layout from '../layouts/Layout.astro';
+import Search from "../components/Search.astro";
+import FilterRegions from "../components/FilterRegions.astro";
+import Layout from "../layouts/Layout.astro";
+import countriesAPI from "../services/api/countriesAPI";
+import type { Country } from "../types/country";
+import CountryCard from "../components/CountryCard.astro";
+
+// const countries = await countriesAPI.getAll();
+
+// console.log(countries);
 ---
 
 <Layout title="Welcome to Astro.">
-	<main class="">
-		<div class="text-color-text px-[80px] min-h-screen pt-[50px]">
-			<div class="">
-				<div class="flex justify-between items-center w-full">
-					<Search />
-					<FilterRegions />
-				</div>
-			</div>
-		</div>
-	</main>
+  <main class="">
+    <div class="text-color-text px-[80px] min-h-screen pt-[50px]">
+      <div class="">
+        <div class="flex justify-between items-center w-full">
+          <Search />
+          <FilterRegions />
+        </div>
+
+        <section>
+          <div
+            class="countries-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-[75px] gap-y-[73px] mt-[47px]"
+          >
+            <!-- {
+              countries.map((country: Country) => (
+                <CountryCard country={country} />
+              ))
+            } -->
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
 </Layout>
 
+<!-- Agregar el script del lado del cliente -->
+<script>
+	import countriesAPI from "../services/api/countriesAPI";
+	import type { Country } from "../types/country";
 
+	document.addEventListener("DOMContentLoaded", async function () {
+		const cachedData = localStorage.getItem("countriesData");
+		let countries = [];
+
+		if (cachedData) {
+			countries = JSON.parse(cachedData);
+		} else {
+			try {
+				countries = await countriesAPI.getAll();
+				localStorage.setItem("countriesData", JSON.stringify(countries));
+			} catch (error) {
+				console.error("Error fetching data:", error);
+			}
+		}
+
+		const renderCountries = (countries: Country[]) => {
+			const countriesList = document.querySelector(".countries-list");
+			console.log(countriesList);
+			if (countriesList) {
+				countriesList.innerHTML = "";
+				countries.forEach((country: Country) => {
+					const countryCard = document.createElement("div");
+					countryCard.classList.add("country-card", "bg-elements", "hover:cursor-pointer", "shadow-md", "rounded-md", "overflow-hidden");
+					countryCard.innerHTML = `
+						<img src='${country.flags.svg}' alt='${country.name.common}' class="w-full h-[160px] object-cover" />
+						<div class="p-6">
+							<h2 class="text-color
+							-text font-semibold text-[18px] mb-4">${country.name.common}</h2>
+							<p class="text-color-text font-medium text-[14px] mb-2">
+								<span class="font-semibold">Population:</span> ${country.population}
+							</p>
+							<p class="text-color-text font-medium text-[14px] mb-2">
+								<span class="font-semibold">Region:</span> ${country.region}
+							</p>
+							<p class="text-color-text font-medium text-[14px] mb-2">
+								<span class="font-semibold">Capital:</span> ${country.capital}
+							</p>
+						</div>
+					`;
+					countriesList.appendChild(countryCard);
+				});
+			}
+		};
+
+		renderCountries(countries);
+	});
+</script>
