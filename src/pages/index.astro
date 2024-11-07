@@ -40,25 +40,13 @@ import CountryCard from "../components/CountryCard.astro";
 <script>
 	import countriesAPI from "../services/api/countriesAPI";
 	import type { Country } from "../types/country";
+	import { countries, selectedRegion } from "../store.js";
 
 	document.addEventListener("DOMContentLoaded", async function () {
-		const cachedData = localStorage.getItem("countriesData");
-		let countries = [];
+		const countriesList = document.querySelector(".countries-list");
 
-		if (cachedData) {
-			countries = JSON.parse(cachedData);
-		} else {
-			try {
-				countries = await countriesAPI.getAll();
-				localStorage.setItem("countriesData", JSON.stringify(countries));
-			} catch (error) {
-				console.error("Error fetching data:", error);
-			}
-		}
-
+		// Render countries
 		const renderCountries = (countries: Country[]) => {
-			const countriesList = document.querySelector(".countries-list");
-			console.log(countriesList);
 			if (countriesList) {
 				countriesList.innerHTML = "";
 				countries.forEach((country: Country) => {
@@ -67,8 +55,7 @@ import CountryCard from "../components/CountryCard.astro";
 					countryCard.innerHTML = `
 						<img src='${country.flags.svg}' alt='${country.name.common}' class="w-full h-[160px] object-cover" />
 						<div class="p-6">
-							<h2 class="text-color
-							-text font-semibold text-[18px] mb-4">${country.name.common}</h2>
+							<h2 class="text-color-text font-semibold text-[18px] mb-4">${country.name.common}</h2>
 							<p class="text-color-text font-medium text-[14px] mb-2">
 								<span class="font-semibold">Population:</span> ${country.population}
 							</p>
@@ -85,6 +72,41 @@ import CountryCard from "../components/CountryCard.astro";
 			}
 		};
 
-		renderCountries(countries);
+		// Fetch and set countries data
+		const fetchCountriesData = async (region: string) => {
+			try {
+				let countriesData;
+				if (region === "all") {
+					countriesData = await countriesAPI.getAll();
+				} else {
+					countriesData = await countriesAPI.getAllByRegion(region);
+				}
+				countries.set(countriesData);
+				localStorage.setItem("countriesData", JSON.stringify(countriesData));
+				renderCountries(countriesData);
+			} catch (error) {
+				console.error("Error fetching data:", error);
+			}
+		};
+
+		// Filter countries by region
+		selectedRegion.subscribe(async (region) => {
+			const cachedData = localStorage.getItem("countriesData");
+			if (cachedData) {
+				const countriesData = JSON.parse(cachedData);
+				if (region === "all") {
+					countries.set(countriesData);
+				} else {
+					const filteredCountries = countriesData.filter((country: Country) => country.region === region.charAt(0).toUpperCase() + region.slice(1));
+					countries.set(filteredCountries);
+				}
+				renderCountries(countries.value);
+			} else {
+				await fetchCountriesData(region);
+			}
+		});
+
+		// Initial fetch
+		await fetchCountriesData("all");
 	});
 </script>

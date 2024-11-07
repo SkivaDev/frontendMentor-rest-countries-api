@@ -17,7 +17,7 @@
   >
     <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">All</li>
     <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">Africa</li>
-    <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">America</li>
+    <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">Americas</li>
     <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">Asia</li>
     <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">Europe</li>
     <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">Oceania</li>
@@ -25,6 +25,8 @@
 </div>
 
 <script>
+  import { selectedRegion } from "../store.js";
+
   document.addEventListener("DOMContentLoaded", () => {
     const button = document.querySelector(".combobox-toggle");
     const selectedText = document.querySelector(".combobox-selected");
@@ -54,6 +56,7 @@
         selectedText ? selectedText.textContent = regionText : null;
         isOpen = false;
         dropdownMenu?.classList.add("hidden");
+        selectedRegion.set(regionText.toLowerCase());
       });
     });
 

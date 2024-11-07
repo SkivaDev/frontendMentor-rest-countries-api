@@ -1,10 +1,15 @@
 import axiosClient from "./axiosClient";
 
 const countriesAPI = {
-  getAll: (params) => {
+  getAll: () => {
       const url = 'all';
-      return axiosClient.get(url, params);
+      return axiosClient.get(url);
   },
+
+  getAllByRegion: (region) => {
+    const url = 'region/' + region;
+    return axiosClient.get(url);
+  }
 //   getTrendingMovieList: (params) => {
 //       const url = 'trending/movie/day'
 //       return axiosClient.get(url, params);

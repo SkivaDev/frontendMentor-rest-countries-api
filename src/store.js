@@ -1,3 +1,7 @@
 import { atom } from 'nanostores';
 
 export const isDarkMode = atom(true);
+
+export const countries = atom([]);
+
+export const selectedRegion = atom('all');
