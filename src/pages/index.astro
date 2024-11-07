@@ -29,6 +29,7 @@ import CountryCard from "../components/CountryCard.astro";
                 <CountryCard country={country} />
               ))
             } -->
+			  <a href=""></a>
           </div>
         </section>
       </div>
@@ -49,7 +50,7 @@ import CountryCard from "../components/CountryCard.astro";
 		const renderCountries = (countries: Country[]) => {
 			if (countriesList) {
 				countriesList.innerHTML = countries.map((country: Country) => `
-					<div class="country-card bg-elements hover:cursor-pointer shadow-md rounded-md overflow-hidden">
+					<a href='/countries/${country.name.common.replace(/\s+/g, '-').toLowerCase()}' class="country-card bg-elements hover:cursor-pointer shadow-md rounded-md overflow-hidden">
 						<img src='${country.flags.svg}' alt='${country.name.common}' class="w-full h-[160px] object-cover" />
 						<div class="p-6">
 							<h2 class="text-color-text font-semibold text-[18px] mb-4">${country.name.common}</h2>
@@ -63,7 +64,7 @@ import CountryCard from "../components/CountryCard.astro";
 								<span class="font-semibold">Capital:</span> ${country.capital}
 							</p>
 						</div>
-					</div>
+					</a>
 				`).join('');
 			}
 		};

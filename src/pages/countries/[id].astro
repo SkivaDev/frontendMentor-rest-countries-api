@@ -1,0 +1,55 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import countriesAPI from "../../services/api/countriesAPI";
+// import { countries } from "../../store.js";
+import type { Country } from "../../types/country";
+
+// export function getStaticPaths() {
+//   console.log(countries.value);
+
+//   countries.subscribe((value) => {
+//     console.log(value);
+//   });
+
+//   return [
+//     { params: { id: "saint-kitts-and-nevis" } },
+//     { params: { id: "south-georgia" } },
+//     { params: { id: "spot" } },
+//   ];
+// }
+
+export async function getStaticPaths() {
+
+  const countries = await countriesAPI.getAll();
+
+  return countries.map((country: Country) => {
+      return {
+      params: { id: country.name.common.replace(/\s+/g, '-').toLowerCase()},
+      props: { country }
+    }
+  })
+}
+
+const { id } = Astro.params;
+const { country } = Astro.props
+const { name, population, region, subregion, capital, tld, currencies, languages} = country
+---
+
+<!-- <Layout title={`${name.common} - Country`}>
+    <div>Name, {name.common}!</div>
+    <div>Native name, {name.nativeName[1].common}!</div>
+    <div>Population, {population}!</div>
+    <div>region, {region}!</div>
+    <div>subregion, {subregion ? subregion : "No subregion"}!</div>
+    <div>capital, {capital}!</div>
+    <div>Top level domain, {tld}!</div>
+    <div>currencies, {Object.values(currencies).map((currency: any) => (<p>{currency.name}</p>))}!</div>
+    <div>languages, {Object.values(languages).map((language: any) => (<p>{language}</p>))}!</div>
+</Layout> -->
+<Layout title={`${id} - Country`}>
+  <p>
+    {id}
+
+  </p>
+</Layout>
+
