@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "project",
         "header",
-        "hook"
+        "hook",
+        "CountryCard"
     ]
 }
