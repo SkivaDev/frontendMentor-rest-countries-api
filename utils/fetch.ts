@@ -1,4 +1,7 @@
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export const fetchAllContries = async () => {
+  await sleep(5000);
   const response = await fetch("https://restcountries.com/v3.1/all");
   const facts = await response.json();
   return facts;
