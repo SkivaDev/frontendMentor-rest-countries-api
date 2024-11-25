@@ -19,7 +19,7 @@ const Header = () => {
           className=" flex justify-center items-center gap-3"
           onClick={toggleTheme}
         >
-          <Image src={isDark ? './modeDark.svg' : './modeLight.svg'} alt="theme icon" width={20} height={20}/>
+          <Image src={isDark ? '/icons/modeDark.svg' : '/icons/modeLight.svg'} alt="theme icon" width={20} height={20}/>
           <span className="">Dark mode</span>
         </button>
       </div>

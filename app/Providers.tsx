@@ -4,5 +4,5 @@ import { SWRConfig } from "swr";
 import fetcher from "@/services/fetcher";
 
 export default function Providers({ children } : { children: ReactNode }) {
-    return <SWRConfig value={{ fetcher, refreshInterval: 3000 }}>{children}</SWRConfig>;
+    return <SWRConfig value={{ fetcher, refreshInterval: 3600000 }}>{children}</SWRConfig>;
 }
