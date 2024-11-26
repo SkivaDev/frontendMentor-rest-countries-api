@@ -18,8 +18,8 @@ const CountryPage = () => {
   if (error) return <div>Error loading country data</div>;
 
   return (
-    <main>
-      <div className="text-color-text px-[80px] min-h-screen pt-[83px]">
+    <main className="flex justify-center items-center w-full pt-[83px]">
+      <div className="text-color-text w-full max-w-[90rem] px-[80px]">
         <div>
           <section className="w-full flex justify-start items-center">
             <button className="flex items-center justify-center w-full max-w-[135px] py-2 bg-background shadow-md pr-[7px] gap-[8px] ">
@@ -45,54 +45,77 @@ const CountryPage = () => {
           </section>
 
           <section className="w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-[75px] gap-y-[73px] mt-[47px]">
-              <div className="country-card">
+            <div className="flex justify-between mt-[80px]">
+              <div className="flex-1">
                 <Image
                   src={country.flags.png}
                   alt="flag"
-                  className="w-full h-[200px] object-cover"
-                  width={400}
+                  className="w-[560px] h-[400px] object-cover"
+                  width={560}
                   height={400}
                 />
-                <div className="p-6">
-                  <h2 className="text-2xl font-semibold mb-4">
-                    {country.name.common}
-                  </h2>
-                  <div className="grid grid-cols-2 gap-y-4">
-                    <div>
-                      <span className="font-semibold">Population:</span>{" "}
-                      {country.population}
-                    </div>
-                    <div>
-                      <span className="font-semibold">Region:</span>{" "}
-                      {country.region}
-                    </div>
-                    <div>
-                      <span className="font-semibold">Sub Region:</span>{" "}
-                      {country.subregion}
-                    </div>
-                    <div>
-                      <span className="font-semibold">Capital:</span>{" "}
-                      {country.capital}
-                    </div>
-                    <div>
-                      <span className="font-semibold">Top Level Domain:</span>{" "}
-                      {country.tld}
-                    </div>
-                    {/* <div>
-                      <span className="font-semibold">Currencies:</span>{" "}
-                      {Object.values(country.currencies).map(
-                        (currency: any, index: number) => (
-                          <span key={index}>{currency.name}</span>
-                        )
-                      )}
-                    </div>
-                    <div>
-                      <span className="font-semibold">Languages:</span>{" "}
-                      {Object.values(country.languages).map((language: any) => (
-                        <span key={language}>{language}</span>
-                      ))}
-                    </div> */}
+              </div>
+
+              <div className="flex-1 p-6">
+                <h2 className="text-[35px] font-bold mb-4">
+                  {country.name.common}
+                </h2>
+                <div className="grid grid-cols-2 gap-y-4">
+                  <div>
+                    <span className="font-semibold">Native Name:</span>{" "}
+                    {/* {country.name.nativeName[0].common} */}
+                    {
+                      (
+                        Object.values(country.name.nativeName) as {
+                          common: string;
+                        }[]
+                      )[0].common
+                    }
+                  </div>
+                  <div>
+                    <span className="font-semibold">Top Level Domain:</span>{" "}
+                    {country.tld}
+                  </div>
+                  <div>
+                    <span className="font-semibold">Population:</span>{" "}
+                    {country.population}
+                  </div>
+                  <div>
+                    <span className="font-semibold">Currencies:</span>{" "}
+                    {Object.keys(country.currencies).join(", ")}
+                  </div>
+                  <div>
+                    <span className="font-semibold">Region:</span>{" "}
+                    {country.region}
+                  </div>
+                  <div>
+                    <span className="font-semibold">Languages:</span>{" "}
+                    {Object.values(country.languages).join(", ")}
+                  </div>
+                  <div>
+                    <span className="font-semibold">Sub Region:</span>{" "}
+                    {country.subregion}
+                  </div>
+                  <div>
+                    <span className="font-semibold"></span>{" "}
+                  </div>
+                  <div>
+                    <span className="font-semibold">Capital:</span>{" "}
+                    {country.capital}
+                  </div>
+                </div>
+
+                <div className="flex items-center mt-[30px]">
+                  <h3 className="text-[24px] font-bold">Border Countries:</h3>
+                  <div className="flex gap-4">
+                    {country.borders.map((border: string) => (
+                      <button
+                        key={border}
+                        className="bg-elements text-color-text/85 px-6 py-2 rounded-md shadow-md"
+                      >
+                        {border}
+                      </button>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -100,28 +123,6 @@ const CountryPage = () => {
           </section>
         </div>
       </div>
-      <div>Name, {country?.name?.common}!</div>
-      <div>{name}</div>
-      {/* <div>Native name, {name.nativeName[1].common}!</div>
-      <div>Population, {population}!</div>
-      <div>region, {region}!</div>
-      <div>subregion, {subregion ? subregion : "No subregion"}!</div>
-      <div>capital, {capital}!</div>
-      <div>Top level domain, {tld}!</div>
-      <div>
-        currencies,{" "}
-        {Object.values(currencies).map((currency: any) => (
-          <p>{currency.name}</p>
-        ))}
-        !
-      </div>
-      <div>
-        languages,{" "}
-        {Object.values(languages).map((language: any) => (
-          <p>{language}</p>
-        ))}
-        !
-      </div> */}
     </main>
   );
 };
