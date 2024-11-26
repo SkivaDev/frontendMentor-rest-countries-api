@@ -32,7 +32,7 @@ const CountryPage = () => {
     <main className="flex justify-center items-center w-full pt-[83px]">
       <div className="text-color-text w-full max-w-[90rem] px-[80px]">
         <section className="w-full flex justify-start items-center">
-          <button className="flex items-center justify-center w-full max-w-[135px] py-2 bg-background shadow-md pr-[7px] gap-[8px]" onClick={handleBack}>
+          <button className="flex items-center justify-center w-full max-w-[135px] py-2 bg-background shadow-md pr-[7px] gap-[8px] hover:bg-elements/60 hover:outline hover:outline-1 hover:outline-color-text rounded-md" onClick={handleBack}>
             <span className="mr-[1px]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -105,14 +105,14 @@ const CountryPage = () => {
               </div>
 
               {/* Lista de países vecinos */}
-              <div className="flex items-center mt-[30px]">
-                <h3 className="text-[24px] font-bold">Border Countries:</h3>
+              <div className="flex gap-3 mt-[30px]">
+                <h3 className="text-[18px] font-semibold text-nowrap">Border Countries:</h3>
                 <div className="flex gap-4 flex-wrap">
                   {bordersLoading && <div>Loading borders...</div>}
                   {borders.map((border) => (
                     <a
                       key={border.cca3}
-                      className="bg-elements text-color-text/85 px-6 py-2 rounded-md shadow-md"
+                      className="bg-elements text-color-text/85 px-5 py-1 rounded-md shadow-md hover:bg-elements/60 hover:outline hover:outline-1 hover:outline-color-text"
                       href={`/countries/${border.name.common}`}
                     >
                       {border.name.common}
