@@ -27,11 +27,11 @@ const CountryPage = () => {
   const borders = borderData ?? [];
 
   return (
-    <main className="flex justify-center items-center w-full pt-[83px]">
-      <div className="text-color-text w-full max-w-[90rem] px-[80px]">
+    <main className="flex justify-center items-center w-full pt-[50px] md:pt-[83px]">
+      <div className="text-color-text w-full max-w-[90rem] px-[22px] md:px-[80px]">
         <section className="w-full flex justify-start items-center">
           <Link
-            className="flex items-center justify-center w-full max-w-[135px] py-2 bg-background shadow-md pr-[7px] gap-[8px] hover:bg-elements/60 hover:outline hover:outline-1 hover:outline-color-text rounded-md"
+            className="flex items-center justify-center w-full max-w-[135px] py-2 bg-elements shadow-md pr-[7px] gap-[8px] hover:bg-elements/60 hover:outline hover:outline-1 hover:outline-color-text rounded-md"
             href="/"
           >
             <span className="mr-[1px]">
@@ -56,14 +56,14 @@ const CountryPage = () => {
         </section>
 
         <section className="w-full">
-          <div className="flex justify-between mt-[80px]">
+          <div className="flex flex-col md:flex-row justify-between mt-[30px] md:mt-[80px]">
             <div className="flex-1">
               <Image
                 src={country.flags.png}
                 alt={`${country.name.common} flag`}
                 width={560}
                 height={400}
-                className="w-[560px] h-[400px] object-cover"
+                className="w-full h-auto md:w-[400px] md:h-[285.5px] lg:w-[560px] lg:h-[400px] object-cover"
               />
             </div>
 
@@ -72,7 +72,7 @@ const CountryPage = () => {
                 {country.name.common}
               </h2>
               {/* Información del país */}
-              <div className="grid grid-cols-2 gap-y-4">
+              <div className="text-color-text text-[14px] lg:text-base grid  grid-cols-1 sm:grid-cols-2 gap-y-4">
                 <div>
                   <span className="font-semibold">Native Name:</span>{" "}
                   {
@@ -103,10 +103,21 @@ const CountryPage = () => {
                   <span className="font-semibold">Languages:</span>{" "}
                   {Object.values(country.languages).join(", ")}
                 </div>
+                <div>
+                  <span className="font-semibold">Subregion:</span>{" "}
+                  {country.subregion}
+                </div>
+                <div>
+                  <span className="font-semibold"></span>{" "}
+                </div>
+                <div>
+                  <span className="font-semibold">Capital:</span>{" "}
+                  {country.capital}
+                </div>
               </div>
 
               {/* Lista de países vecinos */}
-              <div className="flex gap-3 mt-[30px]">
+              <div className="flex flex-col lg:flex-row gap-3 mt-[30px]">
                 <h3 className="text-[18px] font-semibold text-nowrap">
                   Border Countries:
                 </h3>
