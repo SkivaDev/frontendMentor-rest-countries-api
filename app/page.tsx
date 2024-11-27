@@ -3,6 +3,7 @@
 import { CountryCard } from "@/components/CountryCard";
 import { FilterNameCountry } from "@/components/FilterNameCountry";
 import { FilterRegions } from "@/components/FilterRegions";
+import SkeletonHome from "@/components/SkeletonHome/SkeletonHome";
 import { useCountries } from "@/services/queries";
 import { Country } from "@/types/country";
 import { useState } from "react";
@@ -22,7 +23,7 @@ export default function Home() {
       country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <SkeletonHome />;
   if (error) return <div>Something was wrong when loading countries... </div>;
 
   return (
