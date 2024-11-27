@@ -32,18 +32,18 @@ const CountryPage = () => {
   const borders = borderData ?? [];
 
   return (
-    <main className="flex justify-center items-center w-full pt-[50px] md:pt-[83px]">
-      <div className="text-color-text w-full max-w-[90rem] px-[22px] md:px-[80px]">
+    <main className="flex justify-center items-center w-full pt-[3.125rem] md:pt-[5.1875rem]">
+      <div className="text-color-text w-full max-w-[1440px] px-[1.375rem] md:px-[5rem]">
         <section className="w-full flex justify-start items-center">
           <Link
-            className="flex items-center justify-center w-full max-w-[135px] py-2 bg-elements shadow-md pr-[7px] gap-[8px] hover:bg-elements/60 hover:outline hover:outline-1 hover:outline-color-text rounded-md"
+            className="flex items-center justify-center w-full max-w-[8.4375rem] py-2 bg-elements shadow-md pr-[.4375rem] gap-[.5rem] hover:bg-elements/60 hover:outline hover:outline-1 hover:outline-color-text rounded-md"
             href="/"
           >
-            <span className="mr-[1px]">
+            <span className="mr-[.0625rem]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="23px"
-                height="23px"
+                width="1.4375rem"
+                height="1.4375rem"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -61,23 +61,23 @@ const CountryPage = () => {
         </section>
 
         <section className="w-full">
-          <div className="flex flex-col md:flex-row justify-between mt-[30px] md:mt-[80px]">
+          <div className="flex flex-col md:flex-row justify-between mt-[1.875rem] md:mt-[5rem]">
             <div className="flex-1">
               <Image
                 src={country.flags.png}
                 alt={`${country.name.common} flag`}
                 width={560}
                 height={400}
-                className="w-full h-auto md:w-[400px] md:h-[285.5px] lg:w-[560px] lg:h-[400px] object-cover"
+                className="w-full h-auto md:w-[25rem] md:h-[17.8438rem] lg:w-[35rem] lg:h-[25rem] object-cover"
               />
             </div>
 
             <div className="flex-1 p-6">
-              <h2 className="text-[35px] font-bold mb-4">
+              <h2 className="text-[2.1875rem] font-bold mb-4">
                 {country.name.common}
               </h2>
               {/* Información del país */}
-              <div className="text-color-text text-[14px] lg:text-base grid  grid-cols-1 sm:grid-cols-2 gap-y-4">
+              <div className="text-color-text text-[.875rem] lg:text-base grid  grid-cols-1 sm:grid-cols-2 gap-y-4">
                 <div>
                   <span className="font-semibold">Native Name:</span>{" "}
                   {
@@ -122,19 +122,19 @@ const CountryPage = () => {
               </div>
 
               {/* Lista de países vecinos */}
-              <div className="flex flex-col lg:flex-row gap-3 mt-[30px]">
-                <h3 className="text-[18px] font-semibold text-nowrap">
+              <div className="flex flex-col lg:flex-row gap-3 mt-[1.875rem]">
+                <h3 className="text-[1.125rem] font-semibold text-nowrap">
                   Border Countries:
                 </h3>
                 <div className="flex gap-4 flex-wrap">
                   {bordersLoading && (
-                    <div className="flex flex-col lg:flex-row gap-3 mt-[30px]">
-                      <div className="h-5 bg-gray-300 rounded-md w-[150px] animate-pulse mb-2 lg:mb-0" />
+                    <div className="flex flex-col lg:flex-row gap-3 mt-[1.875rem]">
+                      <div className="h-5 bg-gray-300 rounded-md w-[9.375rem] animate-pulse mb-2 lg:mb-0" />
                       <div className="flex gap-4 flex-wrap">
                         {Array.from({ length: 3 }).map((_, index) => (
                           <div
                             key={index}
-                            className="bg-gray-200 px-5 py-2 rounded-md shadow-md w-[100px] h-8 animate-pulse"
+                            className="bg-gray-200 px-5 py-2 rounded-md shadow-md w-[6.25rem] h-8 animate-pulse"
                           />
                         ))}
                       </div>

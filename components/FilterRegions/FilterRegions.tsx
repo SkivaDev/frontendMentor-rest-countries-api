@@ -45,11 +45,11 @@ export const FilterRegions = (props: FilterRegionsProps) => {
   }, [isOpen]);
 
   return (
-    <div className="relative inline-block w-[200px] shadow-md">
+    <div className="relative inline-block w-[12.5rem] shadow-md">
       <button
         type="button"
         onClick={toggleDropdown}
-        className="combobox-toggle flex justify-between items-center w-full bg-elements border border-gray-300 rounded-md px-[21px] py-[15px] text-left focus:outline-none text-[14px] font-semibold"
+        className="combobox-toggle flex justify-between items-center w-full bg-elements border border-gray-300 rounded-md px-[1.3125rem] py-[.9375rem] text-left focus:outline-none text-[.875rem] font-semibold"
       >
         <p className="combobox-selected text-nowrap">{selectedRegion === 'All' ? 'Filter by region' : selectedRegion}</p>
         <span className="float-right">&#x25BC;</span>

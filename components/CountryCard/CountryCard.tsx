@@ -21,25 +21,25 @@ export const CountryCard = (props: CountryCardProps) => {
       <Image
         src={country.flags.svg}
         alt={country.name.common}
-        className="w-full h-[200px] object-cover"
+        className="w-full h-[12.5rem] object-cover"
         width={200}
-        height={200}
+        height={0}
       />
       <div className="p-6">
         <h2
           className="text-color
-        -text font-extrabold text-[18px] mb-4"
+        -text font-extrabold text-[1.125rem] mb-4"
         >
           {country.name.common}
         </h2>
-        <p className="text-color-text font-medium text-[14px] mb-2">
+        <p className="text-color-text font-medium text-[.875rem] mb-2">
           <span className="font-bold">Population:</span>{" "}
           {country.population}
         </p>
-        <p className="text-color-text font-medium text-[14px] mb-2">
+        <p className="text-color-text font-medium text-[.875rem] mb-2">
           <span className="font-bold">Region:</span> {country.region}
         </p>
-        <p className="text-color-text font-medium text-[14px] mb-2">
+        <p className="text-color-text font-medium text-[.875rem] mb-2">
           <span className="font-bold">Capital:</span> {country.capital}
         </p>
       </div>

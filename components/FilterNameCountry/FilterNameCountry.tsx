@@ -5,7 +5,7 @@ export const FilterNameCountry = (props: FilterNameCountryProps) => {
   const { searchTerm, setSearchTerm } = props;
 
   return (
-    <div className="flex items-center gap-3 border rounded-lg px-[28px] py-[15px] shadow-md w-full max-w-[480px] bg-elements">
+    <div className="flex items-center gap-3 border rounded-lg px-[1.75rem] py-[.9375rem] shadow-md w-full max-w-[30rem] bg-elements">
       <button className="text-color-text hover:text-color-text/35 ansition-colors duration-200">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,7 @@ export const FilterNameCountry = (props: FilterNameCountryProps) => {
       <input
         type="text"
         placeholder="Search for a country"
-        className="flex-grow outline-none bg-transparent text-color-text placeholder-color-placeholder px-2 text-[14px]"
+        className="flex-grow outline-none bg-transparent text-color-text placeholder-color-placeholder px-2 text-[.875rem]"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
