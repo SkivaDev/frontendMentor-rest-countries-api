@@ -26,8 +26,8 @@ export default function Home() {
   if (error) return <div>Something was wrong when loading countries... </div>;
 
   return (
-    <main className="">
-      <div className="text-color-text px-[80px] min-h-screen pt-[50px]">
+    <main className="flex justify-center items-center w-full pt-[50px]">
+      <div className="text-color-text w-full max-w-[90rem] px-[80px]">
         <div className="">
           <section className="flex justify-between items-center w-full">
             <FilterNameCountry

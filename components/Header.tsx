@@ -9,8 +9,8 @@ const Header = () => {
 
 
   return (
-    <header className="w-full bg-elements text-color-text">
-      <div className="flex justify-between items-center w-full h-[78px] px-[80px]">
+    <header className="flex justify-center items-center w-full bg-elements text-color-text shadow">
+      <div className="flex justify-between items-center w-full max-w-[90rem] h-[78px] px-[80px]">
         <h1 className="text-[20px] font-bold tracking-[1.9px] ml-1">
           Where in the world?
         </h1>

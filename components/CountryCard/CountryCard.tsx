@@ -28,19 +28,19 @@ export const CountryCard = (props: CountryCardProps) => {
       <div className="p-6">
         <h2
           className="text-color
-        -text font-semibold text-[18px] mb-4"
+        -text font-extrabold text-[18px] mb-4"
         >
           {country.name.common}
         </h2>
         <p className="text-color-text font-medium text-[14px] mb-2">
-          <span className="font-semibold">Population:</span>{" "}
+          <span className="font-bold">Population:</span>{" "}
           {country.population}
         </p>
         <p className="text-color-text font-medium text-[14px] mb-2">
-          <span className="font-semibold">Region:</span> {country.region}
+          <span className="font-bold">Region:</span> {country.region}
         </p>
         <p className="text-color-text font-medium text-[14px] mb-2">
-          <span className="font-semibold">Capital:</span> {country.capital}
+          <span className="font-bold">Capital:</span> {country.capital}
         </p>
       </div>
     </div>
