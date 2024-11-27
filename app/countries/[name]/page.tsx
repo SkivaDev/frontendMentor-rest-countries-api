@@ -22,7 +22,7 @@ const CountryPage = () => {
   // Estados de carga y errores
   if (isLoading) return <SkeletonDetails />;
 
-  if (error) return <div>Error loading country data</div>;
+  if (error) return <div className="text-red-500 text-center mt-4">Error loading country data</div>;
 
   const borders = borderData ?? [];
 
