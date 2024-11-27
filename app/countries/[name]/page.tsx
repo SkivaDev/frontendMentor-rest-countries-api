@@ -22,7 +22,12 @@ const CountryPage = () => {
   // Estados de carga y errores
   if (isLoading) return <SkeletonDetails />;
 
-  if (error) return <div className="text-red-500 text-center mt-4">Error loading country data</div>;
+  if (error)
+    return (
+      <div className="text-red-500 text-center mt-4">
+        Error loading country data
+      </div>
+    );
 
   const borders = borderData ?? [];
 
@@ -122,7 +127,19 @@ const CountryPage = () => {
                   Border Countries:
                 </h3>
                 <div className="flex gap-4 flex-wrap">
-                  {bordersLoading && <div>Loading borders...</div>}
+                  {bordersLoading && (
+                    <div className="flex flex-col lg:flex-row gap-3 mt-[30px]">
+                      <div className="h-5 bg-gray-300 rounded-md w-[150px] animate-pulse mb-2 lg:mb-0" />
+                      <div className="flex gap-4 flex-wrap">
+                        {Array.from({ length: 3 }).map((_, index) => (
+                          <div
+                            key={index}
+                            className="bg-gray-200 px-5 py-2 rounded-md shadow-md w-[100px] h-8 animate-pulse"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
                   {borders.map((border) => (
                     <Link
                       key={border.cca3}
