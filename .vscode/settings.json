@@ -5,6 +5,7 @@
         "hook",
         "CountryCard",
         "country detail",
-        "home"
+        "home",
+        "SkeletonHome"
     ]
 }
